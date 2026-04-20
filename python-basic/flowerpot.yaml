@@ -1,0 +1,23 @@
+schedule: "0 8 * * *"
+
+pipelines:
+  extract:
+    run: "python3 scripts/extract.py"
+    env:
+      OUTPUT_DIR: "./data/raw"
+
+  transform:
+    run: "python3 scripts/transform.py"
+    after: [extract]
+    env:
+      INPUT_DIR: "./data/raw"
+      OUTPUT_DIR: "./data/transformed"
+
+  load:
+    run: "python3 scripts/load.py"
+    after: [transform]
+    env:
+      INPUT_DIR: "./data/transformed"
+    retry:
+      attempts: 3
+      delay: "5s"
