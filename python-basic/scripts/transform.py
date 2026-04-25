@@ -3,6 +3,8 @@
 import json
 import os
 
+from tabulate import tabulate
+
 input_dir = os.environ.get("INPUT_DIR", "./data/raw")
 output_dir = os.environ.get("OUTPUT_DIR", "./data/transformed")
 os.makedirs(output_dir, exist_ok=True)
@@ -26,5 +28,8 @@ with open(output_path, "w") as f:
     json.dump(transformed, f, indent=2)
 
 print(f"[transform] processed {len(transformed)} records")
-for r in transformed:
-    print(f"  {r['name']}: {r['score']} -> {r['grade']}")
+print(tabulate(
+    [(r["name"], r["score"], r["grade"]) for r in transformed],
+    headers=["Name", "Score", "Grade"],
+    tablefmt="simple",
+))

@@ -1,21 +1,13 @@
 schedule: "0 */6 * * *"
 
-warehouses:
-  analytics:
-    driver: duckdb
-    dsn: ./data/analytics.duckdb
-
 pipelines:
   create-tables:
-    sql: ./sql/create_tables.sql
-    warehouse: analytics
+    run: "duckdb data/analytics.duckdb < sql/create_tables.sql"
 
   load-seed:
-    sql: ./sql/load_seed.sql
-    warehouse: analytics
+    run: "duckdb data/analytics.duckdb < sql/load_seed.sql"
     after: [create-tables]
 
   transform:
-    sql: ./sql/transform.sql
-    warehouse: analytics
+    run: "duckdb data/analytics.duckdb < sql/transform.sql"
     after: [load-seed]
