@@ -1,6 +1,10 @@
 # SQL DuckDB Basic
 
-A simple 3-pipeline example using DuckDB for local analytics.
+A simple 3-pipeline example using the DuckDB CLI for local analytics.
+
+## Prerequisites
+
+Install DuckDB: `brew install duckdb` (or see [duckdb.org/docs/installation](https://duckdb.org/docs/installation))
 
 ## What it does
 
@@ -20,4 +24,7 @@ create-tables → load-seed → transform
 cd sql-duckdb-basic
 flowerpot validate    # check the config
 flowerpot run         # execute all pipelines
+
+# verify results
+duckdb data/analytics.duckdb "SELECT * FROM revenue_summary"
 ```

@@ -9,6 +9,8 @@ pipelines:
   transform:
     run: "python3 scripts/transform.py"
     after: [extract]
+    python:
+      deps: ["tabulate"]
     env:
       INPUT_DIR: "./data/raw"
       OUTPUT_DIR: "./data/transformed"
