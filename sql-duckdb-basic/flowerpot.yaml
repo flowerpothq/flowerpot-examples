@@ -2,7 +2,7 @@ schedule: "0 */6 * * *"
 
 pipelines:
   create-tables:
-    run: "duckdb data/analytics.duckdb < sql/create_tables.sql"
+    run: "mkdir -p data && duckdb data/analytics.duckdb < sql/create_tables.sql"
 
   load-seed:
     run: "duckdb data/analytics.duckdb < sql/load_seed.sql"
