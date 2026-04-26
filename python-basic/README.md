@@ -7,7 +7,7 @@ A 3-pipeline ETL example using Python scripts with `uv`-managed dependencies.
 - Python 3.8+
 - [uv](https://docs.astral.sh/uv/) — `brew install uv` or `curl -LsSf https://astral.sh/uv/install.sh | sh`
 
-`uv` is used to install inline dependencies (the `transform` step uses `tabulate`). No virtualenv setup is needed — `uv run --with` handles it automatically.
+`uv` is needed for the `transform` step, which uses `python.deps: ["tabulate"]`. The `extract` and `load` steps use plain `python3`. No virtualenv setup is needed — `uv run --with` handles it automatically.
 
 ## What it does
 
