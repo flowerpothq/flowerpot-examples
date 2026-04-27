@@ -1,0 +1,21 @@
+schedule: "0 8 * * *"
+timezone: "UTC"
+
+pipelines:
+  ingestion:
+    config: ingestion/flowerpot.yaml
+    metadata:
+      name: Data Ingestion
+      tags: [daily, python]
+
+  analytics:
+    config: analytics/flowerpot.yaml
+    metadata:
+      name: SQL Analytics
+      tags: [daily, sql]
+
+  scoring:
+    config: scoring/flowerpot.yaml
+    metadata:
+      name: ML Scoring
+      tags: [daily, docker]

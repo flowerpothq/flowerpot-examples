@@ -1,0 +1,7 @@
+pipelines:
+  create_tables:
+    run: "mkdir -p ../data && duckdb ../data/analytics.duckdb < sql/create_tables.sql"
+
+  aggregate:
+    run: "duckdb ../data/analytics.duckdb < sql/aggregate.sql"
+    after: [create_tables, ingestion.normalize]
