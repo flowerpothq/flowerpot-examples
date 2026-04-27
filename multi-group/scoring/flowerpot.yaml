@@ -1,0 +1,10 @@
+pipelines:
+  build:
+    run: "docker build -t flowerpot-scorer ."
+
+  score:
+    run: "docker run --rm -v $(pwd)/../data:/data flowerpot-scorer"
+    after: [build, analytics.aggregate]
+    retry:
+      attempts: 2
+      delay: "10s"
